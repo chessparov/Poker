@@ -4,7 +4,7 @@
 
   At the moment it returns an f string containing info about your current hand, making it easy for the user to acknowledge his situation, but rather difficult for the machine . In particular, if it has to calculate the odds of improving your hand, it's crucial to obtain the result of what_do_I_have in a "workable" and flexible format. The solution is to separate the print and the calculations in different functions. This way we can also add a third function in between to order the cards by value.
 
-- **Update or point-blank write the probility calculation functions**
+- **Update or point-blank write the probability calculation functions**
 - **Add the "against-odds" calculated considering the number of players**
 - **Refactor code in different files for better usability and mantainability**
 ## Additional features to be implemented
