@@ -4,6 +4,13 @@
 The idea behind this project is to provide a tool for assisting the player during a Poker game,
 particularly by analyzing in real time a hand given a user input and thus helping the player to improve his strategy and decision making by offering probability based predictions.
 
+### Suggestions
+For an optimal user experience make sure you run the program directly in terminal by running the following command line:
+
+``python3 Poker.py``
+
+If you still prefer running the code through your IDE, make sure you enable terminal emulation in the configuration file of your current project.
+
 ## Code Structure
 The program is built using OOP paradigms. Each entity has its own class and methods and custom exceptions are added to improve error handling.
 
