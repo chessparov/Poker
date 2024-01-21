@@ -1,3 +1,3 @@
 numpy
 termcolor
-scipy -> Currently disabled, not necessary atm
+scipy -> Currently disabled
