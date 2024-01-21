@@ -1,5 +1,5 @@
 # Texas Hold'em Game Analytics
-![Image containing some cards on white background](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT13KjK7D9lIdrLn3kXN5X0GaVqVrBRZbf09g&usqp=CAU)
+![Image containing some cards on white background](Suits_rough.png)
 ## Scope
 The idea behind this project is to provide a tool for assisting the player during a Poker game,
 particularly by analyzing in real time a hand given a user input and thus helping the player to improve his strategy and decision making by offering probability based predictions.
