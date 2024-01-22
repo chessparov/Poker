@@ -19,3 +19,8 @@
 
   The intention is to make the tools available to a wider userbase and increment the overall speed and effectiv ness by making easier the data input, which is  currently the more time-costly
 part of the project.
+
+- **Add implied odds**
+
+  Multiply the pot odds by a factor based on your position. If you're the last one, the factor should be 1 as you're 100% sure the pot won't change after you call or bet, on the contrary, when you're 
+among the firsts to make a decision about a certain call or bet, the pot odds are much more uncertain and volatile.
