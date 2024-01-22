@@ -10,10 +10,11 @@ import copy
 # import scipy as sp                        # Used for sp.special.binom
 from termcolor import colored
 import sys
+import colorama
 import time
 
 # Import sys for trying to solve termcolor package malfunction
-sys.path.append('/home/cristian/PycharmProjects/venv/MainDir/lib/python3.11/site-packages/')
+# sys.path.append('/home/cristian/PycharmProjects/venv/MainDir/lib/python3.11/site-packages/')
 
 class ExceptInvalidCard(Exception):
     """
@@ -285,6 +286,7 @@ class THand:
         self.__deckcopy = copy.deepcopy(self.__deck)
         self._greenthreshold = float(0.10)      # Used as parameters in termcolor to color in certain ways different percentages
         self._redthreshold = float(0.30)
+        colorama.init()
 
         ################################################################################################################
         # PreFlop
