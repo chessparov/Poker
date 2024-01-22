@@ -1,3 +1,9 @@
-numpy
-termcolor
-scipy -> Currently disabled
+----All Operating systems----
+
+-numpy
+-termcolor
+-scipy -> Currently disabled
+
+----Windows only----
+
+-colorama (necessary for the correct functioning of termcolor)
