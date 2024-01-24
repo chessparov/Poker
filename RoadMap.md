@@ -6,7 +6,7 @@
 
   ~~At the moment it returns an f string containing info about your current hand, making it easy for the user to acknowledge his situation, but rather difficult for the machine . In particular, if it has to calculate the odds of improving your hand, it's crucial to obtain the result of ``what_do_I_have`` in a "workable" and flexible format. The solution is to separate the print and the calculations in different functions. This way we can also add a third function in between to order the cards by value.~~
 
-Solved by making each ``check`` function return a list containing both an fstring and a list of cards. This way I didn't occur in the issue of having to export all the ``check`` functions to be able to use them in a dedicated print function.
+  Solved by making each ``check`` function return a list containing both an fstring and a list of cards. This way I didn't occur in the issue of having to export all the ``check`` functions to be able to use them in a dedicated print function.
 
 - **Update or point-blank write the probability calculation functions**
 - **Add the "against-odds" calculated considering the number of players**
