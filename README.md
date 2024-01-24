@@ -2,13 +2,22 @@
 <img src="Images/Aces.png" width="150" height="150">
 
 ## Scope
+
 The idea behind this project is to provide a tool for assisting the player during a Poker game,
 particularly by analyzing in real time a hand given a user input and thus helping the player to improve his strategy and decision making by offering probability based predictions.
 
+**N.B.** It's not meant as a GTO like [PioSOLVER](https://piosolver.com/) or [b-inary](https://github.com/b-inary)'s [WASM](https://wasm-postflop.pages.dev/). The assistance given is much less "imperative", and is aimed primarly at players that need to get familiar
+with calculating odds and pot odds in real time on recurring hands.
+
+## How to run
+
+Since this program is completely developed in python, if you haven't already done it yet, you need to install and setup python on your system. To do so check my brief [guide](https://github.com/chessparov/chessparov/blob/main/python-setup.md) on the topic, or check the much better and complete [official guide](https://wiki.python.org/moin/BeginnersGuide).
+
 ### Suggestions
+
 For an optimal user experience make sure you run the program directly in terminal by running the following command line:
 
-``python3 Poker.py``
+``$ python3 Poker.py``
 
 If you still prefer running the code through your IDE, make sure you enable terminal emulation in the configuration file of your current project.
 
@@ -48,3 +57,7 @@ The program is built using OOP paradigms. Each entity has its own class and meth
   
 - ### THand
   Still in costruction, but as of now accepts user inputs and, by setting a deck and the current number of players, returns step-by-step the current value of your hand and the odds of improving it by the next reveal of new cards.
+
+## Roadmap
+
+Detailed roadmap [here](https://github.com/chessparov/Poker/blob/main/RoadMap.md). Contributions are highly appreciated.
