@@ -281,11 +281,13 @@ class THand:
         if isinstance(players, int):
             if players > 0:
                 self.__players = players
+        self.__pot = int(0)
         self.__table = list()
         self._hand = list()
         self.__deckcopy = copy.deepcopy(self.__deck)
         self._greenthreshold = float(0.10)      # Used as parameters in termcolor to color in certain ways different percentages
         self._redthreshold = float(0.30)
+
         colorama.init()
 
         ################################################################################################################
@@ -332,9 +334,9 @@ class THand:
             raise ExceptInvalidCard
 
         print(f'\n{"":45s}{"Current Hand":25s}{"Pocket":20s}{"Table":25s}')
-        print(f'{self.what_do_I_have():35s}\n')
+        print(f'{self.what_do_I_have()[0]:35s}\n')
         print(f'The probabilities of improving your hand in the flop are:\n')
-        print(f'{"":33s}{"Probability":20s}\t{"Odds":10s}')
+        print(f'{"":33s}{"Probability":10s}\t{"Odds":10s}')
 
         # All the following if statements have tho only purpose to change the print color of the probability,
         # if it's above a threshold (default = 10%)
@@ -374,6 +376,8 @@ class THand:
         # card4 = TCard('qh')
         # card5 = TCard('ad')
 
+        # flop_pot = int(input(f'Insert the pot: '))
+
         if card3.getName() not in self.__deck.getCardNames():
             raise ExceptInvalidCard
         elif card3.getName() not in self.__deckcopy.getCardNames():
@@ -401,11 +405,12 @@ class THand:
             self.__table.append(card5)
             self._hand.append(self.__card5)
             self.__deckcopy.removeCard(card5)
+        # self.__pot = flop_pot
 
         print(f'\n{"":45s}{"Current Hand":25s}{"Pocket":20s}{"Table":25s}')
-        print(f'{self.what_do_I_have():35s}\n')
+        print(f'{self.what_do_I_have()[0]:35s}\n')
         print(f'The probabilities of improving your hand in the turn are:\n')
-        print(f'{"":33s}{"Probability":20s}\t{"Odds":10s}')
+        print(f'{"":33s}{"Probability":10s}\t{"Odds":10s}')
 
         print(f'{"Pair:":33s}{1:<10.3%}\t\t{"1:"}{(1 / 1) - 1:<.2f}')
         print(f'{"Double Pair:":33s}{1:<10.3%}\t\t{"1:"}{(1 / 1) - 1:<.2f}')
@@ -423,6 +428,7 @@ class THand:
 
         card6 = TCard(input(f'Insert the turn card (e.g. "jh"): '))
         # card6 = TCard('kh')       # Test card
+        # turn_pot = int(input(f'Insert the pot: '))
 
         if card6.getName() not in self.__deck.getCardNames():
             raise ExceptInvalidCard
@@ -434,10 +440,12 @@ class THand:
             self._hand.append(self.__card6)
             self.__deckcopy.removeCard(card6)
 
+        # self.__pot = turn_pot
+
         print(f'\n{"":45s}{"Current Hand":25s}{"Pocket":20s}{"Table":25s}')
-        print(f'{self.what_do_I_have():35s}\n')
+        print(f'{self.what_do_I_have()[0]:35s}\n')
         print(f'The probabilities of improving your hand in the river are:\n')
-        print(f'{"":33s}{"Probability":20s}\t{"Odds":10s}')
+        print(f'{"":33s}{"Probability":10s}\t{"Odds":10s}')
 
         print(f'{"Pair:":33s}{1:<10.3%}\t\t{"1:"}{(1 / 1) - 1:<.2f}')
         print(f'{"Double Pair:":33s}{1:<10.3%}\t\t{"1:"}{(1 / 1) - 1:<.2f}')
@@ -455,6 +463,7 @@ class THand:
 
         card7 = TCard(input(f'Insert the river card (e.g "jh"): '))
         # card7 = TCard('10h')        # Test Card
+        # river_pot = int(input(f'Insert the pot: '))
 
         if card7.getName() not in self.__deck.getCardNames():
             raise ExceptInvalidCard
@@ -466,8 +475,10 @@ class THand:
             self._hand.append(self.__card7)
             self.__deckcopy.removeCard(card7)
 
+        # self.__pot = river_pot
+
         print(f'\n{"":45s}{"Current Hand":25s}{"Pocket":20s}{"Table":25s}')
-        print(f'{self.what_do_I_have():35s}\n')
+        print(f'{self.what_do_I_have()[0]:35s}\n')
         print(f'The probabilities of holding the nuts (winning combination):\n')
 
         print(f'{"Pair:":33s}{1:<10.3%}\t\t{"1:"}{(1 / 1) - 1:<.2f}')
@@ -499,6 +510,9 @@ class THand:
 
     def getCurrentDeckCardNumber(self):
         pass
+
+    def getPot(self):
+        return self.__pot
 
     def setGreen(self, threshold: float):
         """
@@ -581,6 +595,25 @@ class THand:
                 ordered_cards.append(tpl[1])
             return ordered_cards
 
+        # Orders cards even when there are cards with the same value
+        def orderCards_by_Value(lst: list) -> list:
+            lstCards = []
+            lstIndexes = []
+            for i, card in enumerate(lst):
+                index = getIndex(card.getValue())
+                if index not in lstIndexes:
+                    lstIndexes.append(index)
+                lstCards.append((index, card))
+            lstIndexes.sort(reverse=True)
+            lstOrdered_cards = []
+            for i in lstIndexes:
+                for tpl in lstCards:
+                    if tpl[0] == i:
+                        lstOrdered_cards.append(tpl[1])
+            if len(lstOrdered_cards) == len(lst):
+                return lstOrdered_cards
+
+
         ######################################################################
         # Combination checks
         ######################################################################
@@ -601,7 +634,7 @@ class THand:
         def checkforStraightflush():
             if checkforFlush():
                 if checkforStraight(checkforFlush()):
-                    return checkforStraight(checkforFlush())
+                    return orderCards_by_Value(checkforStraight(checkforFlush()))
 
         def checkforFour():
             four = []
@@ -609,7 +642,7 @@ class THand:
                 value = card.getValue()
                 if list(map(TCard.getValue, lstCards)).count(value) == 4:
                     four.append(card)
-            return four
+            return orderCards_by_Value(four)
 
         def checkforFull():
             full = []
@@ -652,7 +685,7 @@ class THand:
                                     counter += 1
                         return highest_full
                 if len(full) == 5:
-                    return full
+                    return orderCards_by_Value(full)
 
         def checkforFlush():
             flush = []
@@ -663,7 +696,7 @@ class THand:
                             flush.append(card)
             if len(flush) > 5:
                 flush = orderCards(flush)[-5:]
-            return flush
+            return orderCards_by_Value(flush)
 
         # The function thea is divided in 3 sections
         # 1° ---> Looks for a straight. Operates using the values of the TCards
@@ -735,12 +768,12 @@ class THand:
                         if i == len(flush.keys()) - 2:
                             if flush[list(flush.keys())[i]] in flush2:
                                 flush2.append(flush[list(flush.keys())[i + 1]])
-                    # Altough quite unlikely, we have to check if there are more than 5 items,
+                    # Although quite unlikely, we have to check if there are more than 5 items,
                     # and pick the higher ones
                     if len(flush2) > 5:
                         return flush2[-5:]
                     if len(flush2) == 5:
-                        return flush2
+                        return orderCards_by_Value(flush2)
 
             # If there's no flush we are safe reducing directly the domain of the straight
             if len(value_straight) > 5:
@@ -760,7 +793,7 @@ class THand:
                     else:
                         straight.append(card)
             if len(straight) == 5:
-                return straight
+                return orderCards_by_Value(straight)
 
         def checkforThree():
             three = []
@@ -768,7 +801,7 @@ class THand:
                 value = card.getValue()
                 if list(map(TCard.getValue, lstCards)).count(value) == 3:
                     three.append(card)
-            return three
+            return orderCards_by_Value(three)
 
         def checkforDPair():
             dpair = []
@@ -788,7 +821,7 @@ class THand:
                 for card1 in dpair:
                     if getIndex(card1.getValue()) in dvalues[0:4]:
                         highest_dpair.append(card1)
-                return highest_dpair
+                return orderCards_by_Value(highest_dpair)
 
         def checkforPair():
             pair = []
@@ -798,7 +831,7 @@ class THand:
             for card in lstCards:
                 if list(map(TCard.getValue, lstCards)).count(card.getValue()) == 2:
                     pair.append(card)
-            return pair
+            return orderCards_by_Value(pair)
 
         def checkforHigh():
             lstIndex = list(map(getIndex, lstValues))
@@ -814,65 +847,65 @@ class THand:
         table = self.getNamesMap(self.getTable())
         if len(lstCards) < 3:
             if lstValues[0] == lstValues[1]:
-                return (f'{"You have a Pair":45s}' +
+                return [(f'{"You have a Pair":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforPair()))):25s}', color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforPair()]
             else:
-                return (f'{"You have a High card":45s}' +
+                return [(f'{"You have a High card":45s}' +
                         colored(f'{orderCards(self.getPocket())[1].getName():25s}', color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), orderCards(self.getPocket())[1]]
         else:
             if checkforRoyalflush():
-                return (f'{"You have a Royal Flush":45s}' +
+                return [(f'{"You have a Royal Flush":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforRoyalflush()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforRoyalflush()]
             elif checkforStraightflush():
-                return (f'{"You have a Straight flush":45s}' +
+                return [(f'{"You have a Straight flush":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforStraightflush()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforStraightflush()]
             elif checkforFour():
-                return (f'{"You have a Four of a kind":45s}' +
+                return [(f'{"You have a Four of a kind":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforFour()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFour()]
             elif checkforFull():
-                return (f'{"You have a Full house":45s}' +
+                return [(f'{"You have a Full house":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforFull()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFull()]
             elif checkforFlush():
-                return (f'{"You have a Flush":45s}' +
+                return [(f'{"You have a Flush":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforFlush()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFlush()]
             elif checkforStraight():
-                return (f'{"You have a Straight":45s}' +
+                return [(f'{"You have a Straight":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforStraight()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforStraight()]
             elif checkforThree():
-                return (f'{"You have a Three of a kind":45s}' +
+                return [(f'{"You have a Three of a kind":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforThree()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforThree()]
             elif checkforDPair():
-                return (f'{"You have a Double Pair":45s}' +
+                return [(f'{"You have a Double Pair":45s}' +
                         colored(f'{"  ".join(map(str, self.getNamesMap(checkforDPair()))):25s}',
                                 color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforDPair()]
             elif checkforPair():
-                return (f'{"You have a Pair":45s}' +
-                        colored(f'{"  ".join(map(str, self.getNamesMap(checkforPair()))):25s}'
-                                , color='light_yellow') +
+                return [(f'{"You have a Pair":45s}' +
+                        colored(f'{"  ".join(map(str, self.getNamesMap(checkforPair()))):25s}',
+                                color='light_yellow') +
                         f'{"  ".join(map(str, pocket)):20s}'
-                        f'{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, table)):25s}'), checkforPair()]
             else:
-
-                return (f'{"You have a High card":45s}' +
+                return [(f'{"You have a High card":45s}' +
                         colored(f'{orderCards(self.getPocket())[1].getName():25s}', color='light_yellow') +
-                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}')
+                        f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), orderCards(self.getPocket())[1]]
+
 
     ###########################################################################################
     # Probabilities of improving on the flop. Calculated pre-flop, thus the names
