@@ -15,9 +15,9 @@ import Poker_PreFlopOdds
 import Poker_FlopOdds
 import Poker_TurnOdds
 
-
-# myappid = 'poker.solutions.0.1'
-# ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+# Comment on linux
+myappid = 'poker.solutions.0.1'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 class TexceptionDialog(QDialog):
 
