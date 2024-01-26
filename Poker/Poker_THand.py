@@ -2,7 +2,6 @@ import Poker_Exceptions
 import Poker_TCard
 import Poker_TDeck
 import Poker_TStdDeck
-import colorama
 import copy
 
 class THand:

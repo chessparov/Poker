@@ -1,7 +1,7 @@
 import Poker_TCard
 import Poker_THand
 import Poker_TDeck
-from termcolor import colored
+
 
 
 def what_do_I_have(hand: Poker_THand.THand):
@@ -298,63 +298,54 @@ def what_do_I_have(hand: Poker_THand.THand):
     table = hand.getNamesMap(hand.getTable())
     if len(lstCards) < 3:
         if checkforPair():
-            return [(f'{"You have a Pair":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforPair()))):30s}', color='light_yellow') +
+            return [(f'{"You have a Pair":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforPair()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforPair()]
         else:
-            return [(f'{"You have a High card":45s}' +
-                     colored(f'{orderCards(hand.getPocket())[1].getName():30s}', color='light_yellow') +
+            return [(f'{"You have a High card":45s}'
+                     f'{orderCards(hand.getPocket())[1].getName():30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'),
                     orderCards(hand.getPocket())[1]]
     else:
         if checkforRoyalflush():
-            return [(f'{"You have a Royal Flush":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforRoyalflush()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Royal Flush":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforRoyalflush()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforRoyalflush()]
         elif checkforStraightflush():
-            return [(f'{"You have a Straight flush":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforStraightflush()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Straight flush":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforStraightflush()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforStraightflush()]
         elif checkforFour():
-            return [(f'{"You have a Four of a kind":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforFour()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Four of a kind":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforFour()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFour()]
         elif checkforFull():
-            return [(f'{"You have a Full house":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforFull()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Full house":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforFull()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFull()]
         elif checkforFlush():
-            return [(f'{"You have a Flush":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforFlush()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Flush":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforFlush()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforFlush()]
         elif checkforStraight():
-            return [(f'{"You have a Straight":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforStraight()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Straight":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforStraight()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforStraight()]
         elif checkforThree():
-            return [(f'{"You have a Three of a kind":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforThree()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Three of a kind":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforThree()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforThree()]
         elif checkforDPair():
-            return [(f'{"You have a Double Pair":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforDPair()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Double Pair":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforDPair()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'), checkforDPair()]
         elif checkforPair():
-            return [(f'{"You have a Pair":45s}' +
-                     colored(f'{"  ".join(map(str, hand.getNamesMap(checkforPair()))):30s}',
-                             color='light_yellow') +
+            return [(f'{"You have a Pair":45s}'
+                     f'{"  ".join(map(str, hand.getNamesMap(checkforPair()))):30s}'
                      f'{"  ".join(map(str, pocket)):20s}'
                      f'{"  ".join(map(str, table)):25s}'), checkforPair()]
         else:
-            return [(f'{"You have a High card":45s}' +
-                     colored(f'{orderCards(hand.getPocket())[1].getName():30s}', color='light_yellow') +
+            return [(f'{"You have a High card":45s}'
+                     f'{orderCards(hand.getPocket())[1].getName():30s}'
                      f'{"  ".join(map(str, pocket)):20s}{"  ".join(map(str, table)):25s}'),
                     orderCards(hand.getPocket())[1]]
