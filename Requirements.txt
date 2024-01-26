@@ -2,6 +2,8 @@
 
 -numpy
 -termcolor
+-ctypes
+-PyQt5
 -scipy -> Currently disabled
 
 ----Windows only----
