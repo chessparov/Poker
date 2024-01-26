@@ -208,25 +208,35 @@ class TmainWindow(QMainWindow):
 
 
             if self.input_counter >= 2 and self.input_counter < 5:
-                subtitle = QLabel(f'\nThe probabilities of improving your hand in the flop are:\n\n{"":33s}'
+                subtitle = QLabel(
+                    f'\nThe probabilities of improving your hand in the flop are:\n\n{"":33s}'
                                   f'{"Probability":20s}\t{"Odds":10s}')
-                pair = QLabel(f'{"Pair: ":33s}{Poker_PreFlopOdds.pair_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                pair = QLabel(
+                    f'{"Pair: ":33s}{Poker_PreFlopOdds.pair_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                               f'{(1/Poker_PreFlopOdds.pair_preflop(self.hand.pocket)) - 1:<.2f}')
-                dpair = QLabel(f'{"Double Pair: ":33s}{Poker_PreFlopOdds.dpair_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                dpair = QLabel(
+                    f'{"Double Pair: ":33s}{Poker_PreFlopOdds.dpair_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                f'{(1 / Poker_PreFlopOdds.dpair_preflop(self.hand.pocket)) - 1:<.2f}')
-                three = QLabel(f'{"Three of a kind:":33s}{Poker_PreFlopOdds.three_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                three = QLabel(
+                    f'{"Three of a kind:":33s}{Poker_PreFlopOdds.three_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                f'{(1 / Poker_PreFlopOdds.three_preflop(self.hand.pocket)) - 1:<.2f}')
-                straight = QLabel(f'{"Straight:":33s}{Poker_PreFlopOdds.straight_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                straight = QLabel(
+                    f'{"Straight:":33s}{Poker_PreFlopOdds.straight_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                   f'{(1 / Poker_PreFlopOdds.straight_preflop(self.hand.pocket)) - 1:<.2f}')
-                flush = QLabel(f'{"Flush:":33s}{Poker_PreFlopOdds.flush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                flush = QLabel(
+                    f'{"Flush:":33s}{Poker_PreFlopOdds.flush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                f'{(1 / Poker_PreFlopOdds.flush_preflop(self.hand.pocket)) - 1:<.2f}')
-                full = QLabel(f'{"Full house:":33s}{Poker_PreFlopOdds.full_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                full = QLabel(
+                    f'{"Full house:":33s}{Poker_PreFlopOdds.full_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                               f'{(1 / Poker_PreFlopOdds.full_preflop(self.hand.pocket)) - 1:<.2f}')
-                four = QLabel(f'{"Four of a kind:":33s}{Poker_PreFlopOdds.four_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                four = QLabel(
+                    f'{"Four of a kind:":33s}{Poker_PreFlopOdds.four_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                               f'{(1 / Poker_PreFlopOdds.four_preflop(self.hand.pocket)) - 1:<.0f}')
-                str_flush = QLabel(f'{"Straight flush:":33s}{Poker_PreFlopOdds.straightflush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                str_flush = QLabel(
+                    f'{"Straight flush:":33s}{Poker_PreFlopOdds.straightflush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                    f'{(1 / Poker_PreFlopOdds.straightflush_preflop(self.hand.pocket)) - 1:<.2f}')
-                royal = QLabel(f'{"Royal flush:":33s}{Poker_PreFlopOdds.royalflush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
+                royal = QLabel(
+                    f'{"Royal flush:":33s}{Poker_PreFlopOdds.royalflush_preflop(self.hand.pocket):<10.3%}\t\t{"1:"}'
                                f'{(1 / Poker_PreFlopOdds.royalflush_preflop(self.hand.pocket)) - 1:<.2f}')
 
             if self.input_counter == 5:
