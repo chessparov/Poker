@@ -5,6 +5,7 @@
 -ctypes
 -PyQt5
 -scipy -> Currently disabled
+-azonix font package -> download and install from the assets directory
 
 ----Windows only----
 
