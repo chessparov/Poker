@@ -16,15 +16,15 @@ import Poker_FlopOdds
 import Poker_TurnOdds
 
 
-myappid = 'poker.solutions.0.1'
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+# myappid = 'poker.solutions.0.1'
+# ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 class TexceptionDialog(QDialog):
 
     def __init__(self, exception: str):
         super().__init__()
         self.setGeometry(500, 300, 200, 120)
-        self.setWindowIcon(QtGui.QIcon('Assets/Exception_x.png'))
+        self.setWindowIcon(QtGui.QIcon('../Assets/Exception_x.png'))
         self.setWindowTitle('Error')
         layout = QVBoxLayout()
         label = QLabel(exception)
@@ -48,7 +48,7 @@ class TsubHelpWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setGeometry(100, 100, 800, 800)
-        self.setWindowIcon(QtGui.QIcon('Assets/Excl_mark.jpg'))
+        self.setWindowIcon(QtGui.QIcon('../Assets/Excl_mark.jpg'))
         self.setWindowTitle('Help')
 
 class TsubWindow(QWidget):
@@ -56,7 +56,7 @@ class TsubWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setGeometry(900, 100, 700, 400)
-        self.setWindowIcon(QtGui.QIcon('Assets/Spades.png'))
+        self.setWindowIcon(QtGui.QIcon('../Assets/Spades.png'))
 
 class TmainWindow(QMainWindow):
 
@@ -71,7 +71,7 @@ class TmainWindow(QMainWindow):
         self.initUI()
         self.setGeometry(200, 100, 600, 600)
         self.setWindowTitle("Texas Hold'em Hand Analysis")
-        self.setWindowIcon(QtGui.QIcon('../Poker/Assets/Spades.png'))
+        self.setWindowIcon(QtGui.QIcon('../Assets/Spades.png'))
 
 
         self.setInput()
