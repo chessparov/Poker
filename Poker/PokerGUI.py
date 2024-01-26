@@ -40,8 +40,8 @@ class TexceptionDialog(QDialog):
         self.setFont(QFont("Segoe UI", 11))
         self.setLayout(layout)
 
-        self.quitSc = QShortcut(QKeySequence('Return'), self)
-        self.quitSc.activated.connect(self.clickMethod)
+        # self.quitSc = QShortcut(QKeySequence('Return'), self)
+        # self.quitSc.activated.connect(self.clickMethod)
 
 class TsubHelpWindow(QWidget):
 
