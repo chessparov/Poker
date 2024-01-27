@@ -15,7 +15,7 @@ Since this program is completely developed in python, if you haven't already don
 
 ### Suggestions
 
-For an optimal user experience make sure you have all libraries indicated in the [requirements](Requirements.txt) correclty installed and also make sure to install the Azonix font that you can find in the [assets](Assets) directory. To do so:
+For an optimal user experience make sure you have all libraries indicated in the [requirements](https://github.com/chessparov/Poker/blob/GUI-Version-0.1/Requirements.txt) correclty installed and also make sure to install the Azonix font that you can find in the [assets](https://github.com/chessparov/Poker/blob/GUI-Version-0.1/Assets/) directory. To do so:
 
 **Windows:**  Extract the file, double click it and press install
 
