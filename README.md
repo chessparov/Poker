@@ -15,18 +15,11 @@ Since this program is completely developed in python, if you haven't already don
 
 ### Suggestions
 
-For an optimal user experience make sure you have all libraries indicated in the [requirements](https://github.com/chessparov/Poker/blob/GUI-Version-0.1/Requirements.txt) correclty installed and also make sure to install the Azonix font that you can find in the [assets](https://github.com/chessparov/Poker/blob/GUI-Version-0.1/Assets/) directory. To do so:
+For an optimal user experience make sure you run the program directly in terminal by running the following command line:
 
-**Windows:**  Extract the file, double click it and press install
+``$ python3 Poker.py``
 
-**Linux:**  Extract the file and copy it in the directory `usr/share/fonts/opentype`. If it doesn't exist, just create it. 
-  Please note, since it's a sys directory, you'll most likely need root privileges. To simply obtain them, create the dir in terminal by running `sudo mkdir usr/share/fonts/opentype` and then move the file in `mv path/to/Azonix.otf usr/share/fonts/opentype`
-
-To run the program, either open PokerMain.py in your IDE, or run from terminal:
-
-**Windows:** ``$ python PokerMain.py``
-
-**Linux:** ``$ python3 PokerMain.py``
+If you still prefer running the code through your IDE, make sure you enable terminal emulation in the configuration file of your current project.
 
 ## Code Structure
 The program is built using OOP paradigms. Each entity has its own class and methods and custom exceptions are added to improve error handling.
