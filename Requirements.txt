@@ -1,12 +1,7 @@
 ----All Operating systems----
 
 -numpy
--termcolor
--ctypes
+-ctypes -< Should be already installed
 -PyQt5
 -scipy -> Currently disabled
 -azonix font package -> download and install from the assets directory
-
-----Windows only----
-
--colorama (necessary for the correct functioning of termcolor)
