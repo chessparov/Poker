@@ -15,10 +15,11 @@ import Poker_PreFlopOdds
 import Poker_FlopOdds
 import Poker_TurnOdds
 
-# Comment on linux
-myappid = 'poker.solutions.0.1'
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
+# myappid = 'poker.solutions.0.1'
+# ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+# Defines the pop up dialog that comes out when an exception occurr
 class TexceptionDialog(QDialog):
 
     def __init__(self, exception: str):
@@ -43,6 +44,7 @@ class TexceptionDialog(QDialog):
         # self.quitSc = QShortcut(QKeySequence('Return'), self)
         # self.quitSc.activated.connect(self.clickMethod)
 
+# The sub window containing the help information
 class TsubHelpWindow(QWidget):
 
     def __init__(self):
@@ -51,6 +53,7 @@ class TsubHelpWindow(QWidget):
         self.setWindowIcon(QtGui.QIcon('../Assets/Excl_mark.jpg'))
         self.setWindowTitle('Help')
 
+# The subwindow containing odds and cards info
 class TsubWindow(QWidget):
 
     def __init__(self):
@@ -58,6 +61,7 @@ class TsubWindow(QWidget):
         self.setGeometry(900, 100, 700, 400)
         self.setWindowIcon(QtGui.QIcon('../Assets/Spades.png'))
 
+# The main window
 class TmainWindow(QMainWindow):
 
     def __init__(self):
@@ -77,7 +81,7 @@ class TmainWindow(QMainWindow):
         self.setInput()
 
 
-
+	# Sets the tile and the font of the main window
     def initUI(self):
 
         QtGui.QFontDatabase.addApplicationFont(r"/Azonix.otf")
@@ -93,11 +97,11 @@ class TmainWindow(QMainWindow):
         layout.addWidget(title)
         self.setLayout(layout)
 
-
+	# Sets the buttons and input box of the main window
     def setInput(self):
 
         box_label = QLabel(self)
-        box_label.setText('Type your cards in the box below and press enter to submit.')
+        box_label.setText('Type your cards in the box below and press enter to submit')
         box_label.move(50, 240)
         box_label.setFixedSize(500, 40)
         box_label.setFont(QFont("Segoe UI", 12))
@@ -109,28 +113,35 @@ class TmainWindow(QMainWindow):
         self.input.setFont(QFont("Segoe UI", 11))
         self.input.resize(320, 32)
 
-        enter_button = QPushButton('OK', self)
-        enter_button.setAutoDefault(True)
-        enter_button.setDefault(True)
-        enter_button.clicked.connect(self.clickMethod)
-        enter_button.resize(322, 30)
-        enter_button.move(139, 320)
+        self.enter_button = QPushButton('OK', self)
+        self.enter_button.setAutoDefault(True)
+        self.enter_button.setDefault(True)
+        self.enter_button.clicked.connect(self.clickMethod)
+        self.enter_button.resize(322, 30)
+        self.enter_button.move(139, 320)
 
-        restart_button = QPushButton('Restart', self)
-        restart_button.clicked.connect(self.restartMethod)
-        restart_button.resize(322, 30)
-        restart_button.move(139, 352)
+        self.restart_button = QPushButton('Restart', self)
+        self.restart_button.clicked.connect(self.restartMethod)
+        self.restart_button.resize(322, 30)
+        self.restart_button.move(139, 352)
 
         self.quitSc = QShortcut(QKeySequence('Return'), self)
         self.quitSc.activated.connect(self.clickMethod)
 
+	# Should add a dialog to ask if I'm sure I want to restart, as all progress is gonna be deleted
     def clickMethod(self):
         if self.input_counter == 0:
+            self.input.show()
+            self.enter_button.setText('OK')
+            self.restart_button.show()
             self.hand.hand = list()
             self.hand.pocket = list()
             self.hand.table = list()
             self.hand.deckcopy = copy.deepcopy(self.deck)
-
+            if self.w is not None:
+                self.w.close()
+                self.w = None
+            
         self.input_counter += 1
         if self.input.text() == '?':
             if self.help is None:
@@ -186,15 +197,28 @@ class TmainWindow(QMainWindow):
         self.input.setPlaceholderText(f'Insert your {self.input_dict[self.input_counter]} card (e.g. jh)')
 
         if self.input_counter == 7:
-            self.input.close()
+            self.input.hide()
+            self.input_counter = int(0)
+            self.enter_button.setText('New Hand')
+            self.restart_button.hide()
 
+            
+
+	# Restores the values of the hand and close the window containing the odds info
     def restartMethod(self):
-        self.input.clear()
-        self.input_counter = int(0)
-        self.clickMethod()
-        self.w.close()
-        self.w = None
+        if self.w is not None:
+            self.input.clear()
+            self.w.close()
+            self.w = None
+            self.input_counter = int(0)
+            self.clickMethod()
+        else:
+            self.input.clear()
+            self.input_counter = int(0)
+            self.clickMethod()
 
+	
+	# Creates the labels containing info about the cards
     def showCardsMethod(self):
         # if self.w is None:
         if self.input_counter >= 2:
